@@ -1,0 +1,44 @@
+version: "3.9"
+services:
+
+  shinyproxy:
+    build: 
+      context: .
+      dockerfile: shinyDockerfile
+    depends_on: 
+      - db
+    networks:
+      - visualizer
+    ports:
+      - "8080:8080"
+      - "5005:5005"
+    volumes:
+        - zips:/opt/shinyproxy/zips
+        - userdata:/opt/shinyproxy/userdata
+    environment: 
+      - POSTGRES_PASSWORD=supersecure
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    deploy:
+      restart_policy: 
+        condition: always
+    
+
+  db:
+    image: metamorph/visualizer-db
+    networks:
+      - visualizer
+    ports:
+      - "5444:5432"
+    environment: 
+      - POSTGRES_PASSWORD=supersecure
+    deploy:
+      restart_policy: 
+        condition: always
+
+volumes:
+  zips:
+  userdata:
+
+networks:
+  visualizer:

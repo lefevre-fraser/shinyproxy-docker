@@ -1,0 +1,63 @@
+proxy:
+  title: MetaMorph Shiny Proxy Visualizer
+  logo-url: https://images.squarespace-cdn.com/content/548083a7e4b0d1770a9e3972/1425996615267-VNWSUH0ZIWGHUIB9WYBU/MetaMorph+Logo.png?format=1500w&content-type=image%2Fpng
+  landing-page: /
+  heartbeat-enabled: true
+  heartbeat-rate: 10000
+  heartbeat-timeout: 60000
+  port: 8080
+  authentication: simple
+  admin-groups: scientists
+  # Example: 'simple' authentication configuration
+  users:
+  - name: jack
+    password: password
+    groups: scientists
+  - name: jeff
+    password: password
+    groups: mathematicians
+  - name: admin
+    password: password
+  - name: bob
+    password: password
+  # Example: 'ldap' authentication configuration
+  ldap:
+    url: ldap://ldap.forumsys.com:389/dc=example,dc=com
+    user-dn-pattern: uid={0}
+    group-search-base:
+    group-search-filter: (uniqueMember={0})
+    manager-dn: cn=read-only-admin,dc=example,dc=com
+    manager-password: password
+  # SQLService Info
+  sql:
+    url: jdbc:postgresql://db:5432/postgres
+    username: postgres
+    password: ${POSTGRES_PASSWORD}
+    max-connections: 20
+    max-connection-lifetime-milliseconds: 0
+    max-idle-connections: 5
+    min-idle-connections: 2
+  # Docker configuration
+  docker:
+    url: http://host.docker.internal:2375
+    port-range-start: 20000
+  # Data Storage
+  storage:
+    files:
+      user-docker-volume: shinyproxyvisualizer_userdata
+      zip-location: /opt/shinyproxy/zips
+      user-location: /opt/shinyproxy/userdata
+
+logging:
+  level:
+    com.metamorphsoftware DEBUG
+    eu.openanalytics DEBUG
+  file:
+    shinyproxy.log
+
+spring:
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 2GB
+      max-request-size: 2GB

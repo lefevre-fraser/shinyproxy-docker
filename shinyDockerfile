@@ -1,0 +1,11 @@
+FROM openanalytics/shinyproxy
+
+COPY shinyproxy-visualizer-1.0.0.jar shinyproxy.jar
+COPY application.yml application.yml
+
+USER shinyproxy
+RUN mkdir -p /opt/shinyproxy/zips
+RUN mkdir -p /opt/shinyproxy/userdata
+
+# CMD java -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=0.0.0.0:5005 -jar shinyproxy.jar --debug
+CMD java -jar shinyproxy.jar --debug

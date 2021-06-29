@@ -1,0 +1,14 @@
+deploy/Dig.wxi
+deploy/R.wxi
+deploy/SurrogateModeling.wxi
+Dig/.Rhistory
+Dig/datasets/**/*_test.log
+Dig/plot-*.pdf
+DigTest/.vs/
+DigTest/bin/
+DigTest/nuget/
+DigTest/obj/
+Downloads/
+license.rtf
+/WiX.3.11.0/
+.Rproj.user

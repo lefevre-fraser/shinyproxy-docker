@@ -1,0 +1,3 @@
+FROM metamorph/shinyproxy-visualizer
+
+COPY application.yml application.yml

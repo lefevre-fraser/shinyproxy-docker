@@ -1,0 +1,27 @@
+FROM r-base
+
+RUN R -e "install.packages('shiny', repos='http://cran.rstudio.com/')"
+RUN R -e "install.packages('shinyjs', repos='http://cran.rstudio.com/')"
+RUN R -e "install.packages('shinyBS', repos='http://cran.rstudio.com/')"
+RUN R -e "install.packages('jsonlite')"
+RUN R -e "install.packages('topsis')"
+RUN R -e "install.packages('colourpicker')"
+RUN R -e "install.packages('jpeg')"
+RUN R -e "install.packages('png')"
+RUN apt-get update && apt-get install libgsl0-dev -y
+RUN R -e "install.packages('copula')"
+RUN R -e "install.packages('DT')"
+RUN R -e "install.packages('DiceKriging')"
+RUN R -e "install.packages('randomForest')"
+
+RUN apt-get update && apt-get install vim -y
+RUN apt-get update && apt-get install curl -y
+
+RUN useradd -ms /bin/bash visualizer
+USER visualizer
+WORKDIR /home/visualizer
+RUN mkdir -p /home/visualizer/data
+
+COPY visualizerFiles /home/visualizer
+COPY visualizer-entrypoint.sh /entrypoint.sh
+ENTRYPOINT /entrypoint.sh
