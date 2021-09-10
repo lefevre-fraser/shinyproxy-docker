@@ -1,0 +1,10 @@
+DROP FUNCTION IF EXISTS user_file_access;
+DROP VIEW IF EXISTS file_access;
+DROP TABLE IF EXISTS shared_files;
+DROP TABLE IF EXISTS user_file_permission;
+DROP TABLE IF EXISTS file_permission;
+DROP TABLE IF EXISTS file;
+DROP TABLE IF EXISTS app_user;
+DROP FUNCTION IF EXISTS unique_uuid;
+DROP FUNCTION IF EXISTS uuids_from_table;
+DROP EXTENSION IF EXISTS "uuid-ossp";

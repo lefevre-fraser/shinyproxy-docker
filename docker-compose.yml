@@ -13,8 +13,8 @@ services:
       - "8080:8080"
       - "5005:5005"
     volumes:
-        - zips:/opt/shinyproxy/zips
-        - userdata:/opt/shinyproxy/userdata
+      - zips:/opt/shinyproxy/zips
+      - userdata:/opt/shinyproxy/userdata
     environment: 
       - POSTGRES_PASSWORD=supersecure
     extra_hosts:
@@ -32,6 +32,8 @@ services:
       - visualizer
     ports:
       - "5444:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
     environment: 
       - POSTGRES_PASSWORD=supersecure
     deploy:
@@ -41,6 +43,7 @@ services:
 volumes:
   zips:
   userdata:
+  pgdata:
 
 networks:
   visualizer:
